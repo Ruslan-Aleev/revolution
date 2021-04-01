@@ -9,7 +9,7 @@ $table_prefix = '{table_prefix}';
 $dbase = '{dbase}';
 $database_user = '{database_user}';
 $database_password = '{database_password}';
-$database_dsn = '{database_dsn}';
+$database_dsn = "{database_dsn_config}";
 $config_options = {config_options};
 $driver_options = {driver_options};
 
