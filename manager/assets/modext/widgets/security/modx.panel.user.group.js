@@ -396,7 +396,7 @@ MODx.grid.UserGroupUsers = function(config) {
             ,emptyText: _('search_ellipsis')
             ,scope: this
         },{
-            text: _('clear_filter')
+            text: _('filter_clear')
             ,id: 'modx-ugu-clear-filter'
             ,cls: 'x-form-filter-clear'
             ,handler: this.clearFilter
