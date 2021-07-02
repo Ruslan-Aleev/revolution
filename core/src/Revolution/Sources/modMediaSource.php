@@ -2033,6 +2033,10 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
         $canCreate = $this->checkPolicy('create');
 
         $menu = [];
+        $menu[] = [
+            'text' => $this->xpdo->lexicon('directory_refresh'),
+            'handler' => 'this.refreshActiveNode',
+        ];
         if ($this->hasPermission('directory_create') && $canCreate) {
             $menu[] = [
                 'text' => $this->xpdo->lexicon('file_folder_create_here'),
@@ -2045,16 +2049,12 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.renameDirectory',
             ];
         }
-        if ($this->visibility_dirs && $this->hasPermission('directory_chmod') && $canSave) {
+        if ($this->hasPermission('directory_remove') && $canRemove) {
             $menu[] = [
-                'text' => $this->xpdo->lexicon('file_folder_visibility'),
-                'handler' => 'this.setVisibility',
+                'text' => $this->xpdo->lexicon('file_folder_remove'),
+                'handler' => 'this.removeDirectory',
             ];
         }
-        $menu[] = [
-            'text' => $this->xpdo->lexicon('directory_refresh'),
-            'handler' => 'this.refreshActiveNode',
-        ];
         if ($this->hasPermission('file_upload') && $canCreate) {
             $menu[] = '-';
             $menu[] = [
@@ -2072,11 +2072,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 'handler' => 'this.quickCreateFile',
             ];
         }
-        if ($this->hasPermission('directory_remove') && $canRemove) {
+        if ($this->visibility_dirs && $this->hasPermission('directory_chmod') && $canSave) {
             $menu[] = '-';
             $menu[] = [
-                'text' => $this->xpdo->lexicon('file_folder_remove'),
-                'handler' => 'this.removeDirectory',
+                'text' => $this->xpdo->lexicon('file_folder_visibility'),
+                'handler' => 'this.setVisibility',
             ];
         }
 
