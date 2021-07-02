@@ -2113,23 +2113,22 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                     'handler' => 'this.quickUpdateFile',
                 ];
             }
-            if ($canOpen) {
-                $menu[] = [
-                    'text' => $this->xpdo->lexicon('file_open'),
-                    'handler' => 'this.openFile',
-                ];
-            }
             $menu[] = [
-                'text' => $this->xpdo->lexicon('rename'),
+                'text' => $this->xpdo->lexicon('file_rename'),
                 'handler' => 'this.renameFile',
             ];
-            if ($this->visibility_files && $canSave) {
-                $menu[] = [
-                    'text' => $this->xpdo->lexicon('file_folder_visibility'),
-                    'handler' => 'this.setVisibility',
-                ];
-            }
-            $menu[] = '-';
+        }
+        if ($this->hasPermission('file_remove') && $canRemove) {
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_remove'),
+                'handler' => 'this.removeFile',
+            ];
+        }
+        if ($this->hasPermission('file_view') && $canOpen) {
+            $menu[] = [
+                'text' => $this->xpdo->lexicon('file_open'),
+                'handler' => 'this.openFile',
+            ];
         }
         if ($this->hasPermission('file_view') && $canView) {
             $menu[] = [
@@ -2145,11 +2144,11 @@ abstract class modMediaSource extends modAccessibleSimpleObject implements modMe
                 ];
             }
         }
-        if ($this->hasPermission('file_remove') && $canRemove) {
+        if ($this->hasPermission('file_update') && $this->visibility_files && $canSave) {
             if (!empty($menu)) $menu[] = '-';
             $menu[] = [
-                'text' => $this->xpdo->lexicon('file_remove'),
-                'handler' => 'this.removeFile',
+                'text' => $this->xpdo->lexicon('file_folder_visibility'),
+                'handler' => 'this.setVisibility',
             ];
         }
 
